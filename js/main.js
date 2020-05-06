@@ -1,7 +1,7 @@
 'use strict';
 
 const cartButton = document.querySelector("#cart-button");
-const modal = document.querySelector(".modal");
+const modalCart = document.querySelector(".modal-cart"); //changed modal to modalCart
 const close = document.querySelector(".close");
 const buttonAuth = document.querySelector('.button-auth');
 const modalAuth = document.querySelector('.modal-auth');
@@ -20,7 +20,7 @@ const cardsMenu = document.querySelector('.cards-menu');
 let login = localStorage.getItem('delivery');
 
 function toggleModal() {
-  modal.classList.toggle("is-open");
+  modalCart.classList.toggle('is-open'); //changed modal to modalCart
 }
 
 function toggleModalAuth() {
@@ -127,13 +127,19 @@ function openGoods(event) {
   const target = event.target;
   const restaurant = target.closest('.card-restaurant');
 
-  if(restaurant) {
-    containerPromo.classList.add('hide');
-    restaurants.classList.add('hide');
-    menu.classList.remove('hide');
+  if(login) {
+    if(restaurant) {
+      containerPromo.classList.add('hide');
+      restaurants.classList.add('hide');
+      menu.classList.remove('hide');
+    }
+    cardsMenu.textContent = '';
+    createCardGood();
+  } else {
+    toggleModalAuth();
   }
-  cardsMenu.textContent = '';
-  createCardGood();
+
+  
 }
 
 cartButton.addEventListener('click', toggleModal);
