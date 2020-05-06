@@ -137,9 +137,7 @@ function openGoods(event) {
     createCardGood();
   } else {
     toggleModalAuth();
-  }
-
-  
+  }  
 }
 
 cartButton.addEventListener('click', toggleModal);
@@ -152,5 +150,4 @@ logo.addEventListener('click', function() {
 });
 
 checkAuth();
-
 createCardRestaurant();
