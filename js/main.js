@@ -158,7 +158,7 @@ function openGoods(event) {
       containerPromo.classList.add('hide');
       restaurants.classList.add('hide');
       menu.classList.remove('hide');
-      getData(`../db/${restaurant.dataset.products}`).then(function(data) {
+      getData(`./db/${restaurant.dataset.products}`).then(function(data) {
         data.forEach(createCardGood);
       });
     } else {
