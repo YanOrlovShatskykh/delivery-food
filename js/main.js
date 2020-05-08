@@ -172,7 +172,7 @@ function openGoods(event) {
       rating.textContent = stars; 
       minPrice.textContent = `От ${price} ₽`;
       category.textContent = kitchen; 
-      getData(`../db/${restaurant.products}`).then(function(data) {
+      getData(`./db/${restaurant.products}`).then(function(data) {
         data.forEach(createCardGood);
       });
     } else {
@@ -182,7 +182,7 @@ function openGoods(event) {
 }
 
 function init() {
-  getData('../db/partners.json').then(function(data) {
+  getData('./db/partners.json').then(function(data) {
     data.forEach(createCardRestaurant);
   });
   
