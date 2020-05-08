@@ -30,6 +30,27 @@ let login = localStorage.getItem('delivery');
 
 const cart = [];
 
+const loadCart = function() {
+  if(localStorage.getItem(login)) {
+    JSON.parse(localStorage.getItem(login)).forEach(function(item) {
+      cart.push(item);
+    });
+  }
+};
+
+//or
+
+// const loadCart = function() {
+//   if(localStorage.getItem(login)) {
+//       cart.push(...JSON.parse(localStorage.getItem(login)));
+//   }
+// };
+
+
+const saveCart = function() {
+  localStorage.setItem(login, JSON.stringify(cart));
+};
+
 const getData = async function(url) {
   const response = await fetch(url);
 
@@ -62,6 +83,7 @@ function returnMain() {
 function authorized() {
   function logOut() {
     login = null;
+    cart.length = 0;
     localStorage.removeItem('delivery');
     localStorage.removeItem('cart');
     buttonAuth.style.display = '';
@@ -78,6 +100,7 @@ function authorized() {
   buttonOut.style.display = 'flex';
   cartButton.style.display = 'flex';
   buttonOut.addEventListener('click', logOut);
+  loadCart();
 }
 
 function notAuthorized() {  
@@ -132,12 +155,6 @@ function createCardRestaurant(restaurant) {
     </div>
   `);
   cardsRestaurants.insertAdjacentElement('beforeend', card);  
-}
-
-function renderHeading() {
-  getData(`../db/partners.json`).then(function(data) {
-    data.forEach(createCardGood);
-  });
 }
 
 function createCardGood({ description, id, image, name, price }) {
@@ -215,6 +232,7 @@ function addToCart(event) {
     }
     // localStorage.setItem('cart', JSON.stringify(cart));
   }
+  saveCart();
 }
 
 function renderCart() {
@@ -281,6 +299,7 @@ function changeCount(event) {
     }
     renderCart();
   }
+  saveCart();
 }
 
 function init() {
