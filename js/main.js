@@ -206,7 +206,7 @@ function init() {
         return;
       }
       const goods = [];
-      getData('../db/partners.json')
+      getData('./db/partners.json')
         .then(function(data) {
           const products = data.map(function(item) {
             return item.products;
